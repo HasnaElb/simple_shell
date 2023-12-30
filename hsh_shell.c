@@ -18,21 +18,30 @@ int main(int argc __attribute__((unused)), char **av, char **env)
 		val_isatty = isatty(STDIN_FILENO);
 		string = get_line(val_isatty);
 
-	if (_strcmp(string, "exit\n") == 0)
+	if (string == NULL)
 	{
-		free(string);
-		exit(0);
+		perror("Error reading input");
+		continue;
 	}
 
-		if (string != NULL)
+		if (_strcmp(string, "exit\n") == 0)
 		{
-			_num_prompt++;
-			line = _strtok(string);
-			_execev(line, av[0], _num_prompt, val_isatty, env);
 			free(string);
+			exit(0);
+		}
+
+		_num_prompt++;
+		line = _strtok(string);
+
+		if (line != NULL)
+		{
+			_execev(line, av[0], _num_prompt, val_isatty, env);
 			free(line);
 		}
+
+		free(string);
 		val_isatty = 0;
 	}
+
 	return (0);
 }
