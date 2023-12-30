@@ -16,7 +16,7 @@ void _execev(char **line, char *argv, int num, int isatty_val, char **envi)
 	if (line == NULL || line[0] == NULL)
 		return;
 
-	if (is_builtin(line, envi) == 1)
+	if (is_buit(line, envi) == 1)
 		return;
 
 	pid = fork();
