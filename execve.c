@@ -33,8 +33,9 @@ void _execev(char **line, char *argv, int num, int isatty_val, char **envi)
 	}
 	else
 	{
-		if (check_path(envi, line) == 0)
-			_exec = execve(line[0], line, envi);
+		unsetenv("PATH");
+
+		_exec = execve("/bin/ls", line, envi);
 
 		if (_exec < 0)
 		{
